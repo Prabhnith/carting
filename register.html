@@ -36,6 +36,7 @@
                   sold            : 0,
                   price           : document.getElementById("itemPrice").value,
                   itemDescription : document.getElementById("itemDescription").value,
+                  password        : document.getElementById("password").value
                 };
             
               console.log(data);
@@ -170,12 +171,21 @@
                                         </span>
                                         </label>
                                         <input class="form-control" id="itemPrice" name="itemPrice" placeholder="275" type="text" required="" />
-                                    </div>
                                     <div class="form-group ">
                                         <label class="control-label " for="itemDescription">
                                         Item Description
                                         </label>
                                         <textarea class="form-control" cols="40" id="itemDescription" name="itemDescripton" placeholder="Data Structure Book by Anil Kumar" rows="10"></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label class="control-label requiredField" for="itemPrice">
+                                        Password 
+                                        <span class="asteriskField">
+                                        *
+                                        </span>
+                                        </label>
+                                        <input class="form-control" id="password" name="password" placeholder="" type="password" required />
                                     </div>
                             </div>
                             </form>
