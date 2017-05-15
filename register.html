@@ -28,7 +28,7 @@
                   item_number     : "",
                   name            : document.getElementById("name").value,
                   email           : document.getElementById("email").value,
-                  mobile          : document.getElementById("tel").value,
+                  mobile          : document.getElementById("mobile").value,
                   hostel          : document.getElementById("hostelName").value,
                   room            : document.getElementById("roomNo").value,
                   item_name       : document.getElementById("itemName").value,
@@ -38,7 +38,20 @@
                   itemDescription : document.getElementById("itemDescription").value,
                   password        : document.getElementById("password").value
                 };
-            
+                
+                if(
+                    data.name         =="" ||
+                    data.email        =="" ||
+                    data.mobile       =="" ||
+                    data.hostelName   =="" ||
+                    data.roomNo       =="" ||
+                    data.itemName     =="" ||
+                    data.itemPrice    =="" ||
+                    data.password     ==""){
+                    alert("complete the form please!!");
+                    return;   
+                }
+
               console.log(data);
               console.log("data sending");
               fetch('/additems', {
@@ -91,7 +104,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="name" name="name" placeholder="Seller name" type="text"/>
+                                        <input class="form-control" id="name" name="name" placeholder="Seller name" type="text" required />
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="email">
@@ -100,7 +113,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="email" name="email" placeholder="seller@email.com" type="text"/>
+                                        <input class="form-control" id="email" name="email" placeholder="seller@email.com" type="text" required />
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="tel">
@@ -109,7 +122,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="mobile" name="mobile" placeholder="987654321" type="text"/>
+                                        <input class="form-control" id="mobile" name="mobile" placeholder="987654321" type="text" required />
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="hostelName">
@@ -118,7 +131,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="hostelName" name="hostelName" placeholder="MMH" type="text"/>
+                                        <input class="form-control" id="hostelName" name="hostelName" placeholder="MMH" type="text" required />
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="roomNo">
@@ -127,7 +140,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="roomNo" name="roomNo" placeholder="BS-1" type="text"/>
+                                        <input class="form-control" id="roomNo" name="roomNo" placeholder="BS-1" type="text" required />
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="itemName">
@@ -136,7 +149,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="itemName" name="itemName" placeholder="Data Structure " type="text"/>
+                                        <input class="form-control" id="itemName" name="itemName" placeholder="Data Structure " type="text" required />
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label " for="select">
@@ -170,7 +183,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="itemPrice" name="itemPrice" placeholder="275" type="text" required="" />
+                                        <input class="form-control" id="itemPrice" name="itemPrice" placeholder="275" type="text" required  />
                                     <div class="form-group ">
                                         <label class="control-label " for="itemDescription">
                                         Item Description
