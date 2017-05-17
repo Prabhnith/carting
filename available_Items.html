@@ -26,7 +26,7 @@
         <!-- <script type="text/javascript" src="js/memenu.js"></script> -->
         <script type="text/javascript">
         window.onload = function() {
-              fetch('http://10.42.0.160:7070/getItems')
+              fetch('http://192.168.1.107:7070/getItems')
                   .then((resp) => resp.json()) // Transform the data into json
                   .then(function(data) {
                     // Create and append the li's to the ul
@@ -36,6 +36,7 @@
                             listitems.innerHTML += `
                     <div class="w3-card ">
                     <pre>
+                    <button class="btn btn-sm btn-danger pull-right" style="margin:5px;" onclick="delItem(${data[i].item_no});">x</button>
                     <img src="https://www.w3schools.com/w3css/img_lights.jpg" class="w3-round-small" alt="Norway" style="width:30%;float:right">
                     Item Name        : ${data[i].itemname} 
                     Item Type        : ${data[i].itemtype} 
@@ -48,12 +49,35 @@
                     </div> `;
                     };
                     });
-          // displayItems();
         };
+
+            function delItem(itemNumber) {
+                    let password=prompt("Enter password:");
+                    let itemToDelete = { itemNumber : password} 
+                    fetch('http://192.168.1.107:7070/delitem', {
+                    method: 'GET',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(itemToDelete)
+                    })
+                    .then(function(resp){ 
+                        console.log(resp);
+                        if(resp.value){
+                            let item=document.getElementById(itemNumber);
+                            item.hidden=true;
+                        }
+
+                    });
+
+            };
             // function displayItems() {
                 
             
             //     var data =[{
+            // item_no:"111",
             // itemname:"chadu",
             // itemtype:"essential",
             // price:"45",
@@ -65,6 +89,7 @@
             // room:"431"
             // },
             // {
+            // item_no:"121",
             // itemname:"chadu",
             // itemtype:"essential",
             // price:"45",
@@ -76,6 +101,7 @@
             // room:"431"
             // },
             // {
+            // item_no:"131",
             // itemname:"chadu",
             // itemtype:"essential",
             // price:"45",
@@ -89,8 +115,9 @@
             //     var listitems= document.getElementById("listItems");
             //     for (var i = 0; i < data.length ; i++) {
             //         listitems.innerHTML += `
-            // <div class="w3-card ">
+            // <div class="w3-card " id="${data[i].item_no}">
             // <pre>
+            // <button class="btn btn-danger pull-right" style="margin:5px;" onclick="delItem(${data[i].item_no});">x</button>
             // <img src="https://www.w3schools.com/w3css/img_lights.jpg" class="w3-round-small" alt="Norway" style="width:30%;float:right">
             // Item Name        : ${data[i].itemname} 
             // Item Type        : ${data[i].itemtype} 
@@ -135,6 +162,7 @@
                 <!-- <div class="w3-card ">
                     <pre>
                         <img src="https://www.w3schools.com/w3css/img_lights.jpg" class="w3-round-small" alt="Norway" style="width:25%;float:right">
+                        <button class="btn btn-danger pull-right" onclick="alert("del");">x</button>
                         Item Name        : Data Structure 
                         Item Type        : Books 
                         Price            : 350
