@@ -1,12 +1,12 @@
 <html class="gr__">
     <head>
         <title>NITH Student Kart</title>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+        <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="js/jquery.min.js"></script>
+        <script src="./js/jquery.min.js"></script>
         <!-- Custom Theme files -->
         <!--theme-style-->
-        <link href="css/style.css" rel="stylesheet" type="text/css" media="all">
+        <link href="./css/style.css" rel="stylesheet" type="text/css" media="all">
         <!--//theme-style-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -15,33 +15,35 @@
         <link href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" rel="stylesheet" type="text/css">
         <!--//fonts-->
         <!-- start menu -->
-        <link href="css/memenu.css" rel="stylesheet" type="text/css" media="all">
+        <link href="./css/memenu.css" rel="stylesheet" type="text/css" media="all">
         <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
         <!-- Inline CSS based on choices in "Settings" tab -->
         <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}
         </style>
-        <script type="text/javascript" src="js/memenu.js"></script>
+        <script type="text/javascript" src="./js/memenu.js"></script>
         <script type="text/javascript">
             function sendData(){
               console.log("in sendData();")
                 var data = {
-                  itemnumber     : "",
+                  item_number     : "",
+                  roll_no         : document.getElementById("rollno").value,
                   name            : document.getElementById("name").value,
                   email           : document.getElementById("email").value,
                   mobile          : document.getElementById("mobile").value,
                   hostel          : document.getElementById("hostelName").value,
                   room            : document.getElementById("roomNo").value,
-                  itemname       : document.getElementById("itemName").value,
-                  itemtype       : document.getElementById("select").value,
-                  sold            : "0",
+                  itemname        : document.getElementById("itemName").value,
+                  itemtype        : document.getElementById("select").value,
+                  sold            : '0',
                   price           : document.getElementById("itemPrice").value,
-                  itemDescription : document.getElementById("itemDescription").value,
-                  imageaddress         : "",
+                  itemdescription : document.getElementById("itemDescription").value,
+                  imageaddress    : 'no_image',
                   password        : document.getElementById("password").value
                 };
                 
-                if(
+             if(
                     data.name         =="" ||
+                    data.roll_no      =="" ||
                     data.email        =="" ||
                     data.mobile       =="" ||
                     data.hostelName   =="" ||
@@ -52,20 +54,19 @@
                     alert("complete the form please!!");
                     return;   
                 }
-
               console.log(data);
               console.log("data sending");
-              fetch('/additems', {
-                    method: 'POST',
-                    headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json'
-                    },
-                    credentials: 'same-origin',
-                    body: JSON.stringify(data)
-            });
+                    fetch('/additems', {
+                            method: 'POST',
+                            headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                            },
+                            credentials: 'same-origin',
+                            body: JSON.stringify(data)
+                    });
             
-              document.getElementById("sellerForm").reset(); 
+            //   document.getElementById("sellerForm").reset(); 
             }
         </script>
     </head>
@@ -88,8 +89,10 @@
         <!-- grow -->
         <div class="grow">
             <div class="container">
-                <h2>Register</h2>
+                <h2>Register <a class=" pull-right" style="color: #fff; font-size:21px;" href="main">Home</a></h2>
+                
             </div>
+            
         </div>
         <div class="container">
             <div class="jumbotron" style="background-color: #fff; ">
@@ -99,13 +102,22 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <form method="get" id="sellerForm">
                                     <div class="form-group ">
+                                        <label class="control-label requiredField" for="rollno">
+                                        Roll No
+                                        <span class="asteriskField">
+                                        *
+                                        </span>
+                                        </label>
+                                        <input class="form-control" id="rollno" name="rollno" placeholder="Seller rollno" type="number"/>
+                                    </div>
+                                    <div class="form-group ">
                                         <label class="control-label requiredField" for="name">
                                         Name
                                         <span class="asteriskField">
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="name" name="name" placeholder="Seller name" type="text" required />
+                                        <input class="form-control" id="name" name="name" placeholder="Seller name" type="text"/>
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="email">
@@ -114,7 +126,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="email" name="email" placeholder="seller@email.com" type="text" required />
+                                        <input class="form-control" id="email" name="email" placeholder="seller@email.com" type="text"/>
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="tel">
@@ -123,7 +135,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="mobile" name="mobile" placeholder="987654321" type="text" required />
+                                        <input class="form-control" id="mobile" name="mobile" placeholder="987654321" type="text"/>
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="hostelName">
@@ -132,7 +144,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="hostelName" name="hostelName" placeholder="MMH" type="text" required />
+                                        <input class="form-control" id="hostelName" name="hostelName" placeholder="MMH" type="text"/>
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="roomNo">
@@ -141,7 +153,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="roomNo" name="roomNo" placeholder="BS-1" type="text" required />
+                                        <input class="form-control" id="roomNo" name="roomNo" placeholder="BS-1" type="text"/>
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label requiredField" for="itemName">
@@ -150,7 +162,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="itemName" name="itemName" placeholder="Data Structure " type="text" required />
+                                        <input class="form-control" id="itemName" name="itemName" placeholder="Data Structure " type="text"/>
                                     </div>
                                     <div class="form-group ">
                                         <label class="control-label " for="select">
@@ -184,7 +196,7 @@
                                         *
                                         </span>
                                         </label>
-                                        <input class="form-control" id="itemPrice" name="itemPrice" placeholder="275" type="text" required  />
+                                        <input class="form-control" id="itemPrice" name="itemPrice" placeholder="275" type="text" required="" />
                                     <div class="form-group ">
                                         <label class="control-label " for="itemDescription">
                                         Item Description
@@ -214,9 +226,8 @@
         <!--//content-->
         <div class="footer w3layouts">
             <div class="footer-class w3-agile">
-                <p>© 2017 STORE. All Rights Reserved | Made at  <a href="http://w3layouts.com/" target="_blank">NITH</a> </p>
+                <p>© 2017 STORE. All Rights Reserved | Made at  <a href="https://github.com/anil1596/carting" target="_blank">NITH</a> </p>
             </div>
         </div>
     </body>
 </html>
-
